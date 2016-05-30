@@ -1,0 +1,3 @@
+use_frameworks!
+
+pod 'PCCOperation', :git => 'git@github.com:rainyboyer/PCCOperation.git'
