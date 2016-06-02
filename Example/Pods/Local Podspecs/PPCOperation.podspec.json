@@ -1,0 +1,27 @@
+{
+  "name": "PPCOperation",
+  "version": "0.1.0",
+  "summary": "A short description of PPCOperation.",
+  "description": "TODO: Add long description of the pod here.",
+  "homepage": "https://github.com/rainyboyer/PPCOperation",
+  "license": {
+    "type": "MIT",
+    "file": "LICENSE"
+  },
+  "authors": {
+    "pen": "pengjunhua2005@21cn.com"
+  },
+  "source": {
+    "git": "https://github.com/rainyboyer/PPCOperation.git",
+    "tag": "0.1.0"
+  },
+  "platforms": {
+    "ios": "8.0"
+  },
+  "source_files": "PPCOperation/Classes/**/*",
+  "dependencies": {
+    "AFNetworking": [
+      "~> 3.1.0"
+    ]
+  }
+}

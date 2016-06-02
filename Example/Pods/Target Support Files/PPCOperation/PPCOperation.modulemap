@@ -1,0 +1,6 @@
+framework module PPCOperation {
+  umbrella header "PPCOperation-umbrella.h"
+
+  export *
+  module * { export * }
+}

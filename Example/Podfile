@@ -1,3 +1,6 @@
 use_frameworks!
 
-pod 'PCCOperation', :git => 'git@github.com:rainyboyer/PCCOperation.git'
+target 'PPCOperation_Example' do
+  pod 'PPCOperation', :path => '../'
+
+end
