@@ -1,6 +1,5 @@
 #import <UIKit/UIKit.h>
 
-#import "SMMSharedBaseClass.h"
 #import "PPCDefine.h"
 #import "NSData+SMMEncrypt.h"
 #import "UIColor+Extension.h"

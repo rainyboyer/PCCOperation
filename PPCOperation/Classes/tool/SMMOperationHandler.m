@@ -20,7 +20,7 @@
 @end
 @implementation SMMOperationHandler
 
-- (instancetype)initWithDownLoadUrlString:(NSString *)urlString
+- (instancetype)initWithDownloadUrlString:(NSString *)urlString
 {
     self = [super init];
     if (self)
