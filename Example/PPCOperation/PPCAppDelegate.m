@@ -118,7 +118,10 @@
     _urlCount++;
     if (_urlCount == 4)
     {
-        [_loadingView removeFromSuperview];
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [_loadingView removeFromSuperview];
+        });
+        
     }
 }
 

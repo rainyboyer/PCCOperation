@@ -99,7 +99,7 @@
         {
             NSFileManager *fileManager = [NSFileManager defaultManager];
             //  location是下载的临时文件目录
-            NSArray *docs = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+            NSArray *docs = NSSearchPathForDirectoriesInDomains(NSCachesDirectory, NSUserDomainMask, YES);
             //  根目录
             NSString *documentsPath = [docs objectAtIndex:0];
             NSLog(@"document: %@", documentsPath);

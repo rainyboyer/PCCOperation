@@ -16,6 +16,8 @@ PODS:
     - AFNetworking/NSURLSession
   - PPCOperation (0.1.0):
     - AFNetworking (~> 3.1.0)
+    - WebViewJavascriptBridge (~> 5.0.5)
+  - WebViewJavascriptBridge (5.0.5)
 
 DEPENDENCIES:
   - PPCOperation (from `../`)
@@ -26,6 +28,7 @@ EXTERNAL SOURCES:
 
 SPEC CHECKSUMS:
   AFNetworking: 5e0e199f73d8626b11e79750991f5d173d1f8b67
-  PPCOperation: 33e1c8eb15219267c1daee524a48bc9ed4e306de
+  PPCOperation: 76b291f67f8f471d1cb65312dc1e1ef0536d908b
+  WebViewJavascriptBridge: a4d502315f1b8d9a51cd6a9174147ed567ec3bc5
 
 COCOAPODS: 0.39.0
