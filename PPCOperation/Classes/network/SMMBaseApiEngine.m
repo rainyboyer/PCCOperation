@@ -105,7 +105,7 @@
                                                       parameters:(NSDictionary *)parameters
 {
     SMMApiRequest *request = [[SMMApiRequest alloc] init];
-    SMMRuntime *runtime = [SMMRuntime sharedManager];
+    SMMRuntime *runtime = [SMMRuntime sharedInstance];
     request.serviceName = serviceName;
     request.os = runtime.os;
     request.osVersion = runtime.osVersion;

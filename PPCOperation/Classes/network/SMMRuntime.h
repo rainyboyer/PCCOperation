@@ -7,9 +7,11 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "SMMSharedBaseClass.h"
-@interface SMMRuntime : SMMSharedBaseClass
+#import "PPCDefine.h"
 
+
+@interface SMMRuntime : NSObject
+PPCSingletonH(Instance)
 // 操作系统
 @property (nonatomic, strong, readonly) NSString *os;
 

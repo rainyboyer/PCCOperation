@@ -9,7 +9,9 @@
 #import "SMMRuntime.h"
 #import <UIKit/UIKit.h>
 
+
 @implementation SMMRuntime
+PPCSingletonM(Instance)
 
 - (instancetype)init
 {
