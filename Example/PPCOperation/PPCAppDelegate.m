@@ -11,6 +11,8 @@
 #import "SMMOperationHandler.h"
 #import "SMMBaseApiEngine.h"
 #import "PPCDefine.h"
+
+#define ApiUrl @"http://124.172.184.212:8009/index.php?g=appApi&m=mapi&a=index"
 @interface PPCAppDelegate ()<SMMOperationHandlerDelegate>
 @property (nonatomic, assign) NSInteger urlCount;
 @property (nonatomic, strong) UIView *loadingView;
@@ -80,7 +82,7 @@
              NSString *urlVersion = fileDic[key][@"url"];
              if (![fileType isEqualToString:keyVersion] && urlVersion.length > 0)
              {
-                 SMMOperationHandler *handler = [[SMMOperationHandler alloc]init];
+                 SMMOperationHandler *handler = [[SMMOperationHandler alloc]initWithDownloadUrlString:@"http://124.172.184.212:8009/tpl/appHtml"];
                  handler.delegate = weakSelf;
                  [handler getFileDictionaryWithUrl:[NSURL URLWithString:urlVersion] version:keyVersion key:key];
              }
@@ -129,7 +131,7 @@
 {
     __weak typeof(self) weakSelf = self;
     void (^downloadAction)(UIAlertAction *) = ^(UIAlertAction *action) {
-        SMMOperationHandler *handler = [[SMMOperationHandler alloc]init];
+        SMMOperationHandler *handler = [[SMMOperationHandler alloc]initWithDownloadUrlString:@"http://124.172.184.212:8009/tpl/appHtml"];
         handler.delegate = weakSelf;
         [handler getFileDictionaryWithUrl:url version:version key:key];
     };

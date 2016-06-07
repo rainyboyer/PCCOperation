@@ -16,7 +16,7 @@
 @end
 
 @interface SMMOperationHandler : NSObject
-
+- (instancetype)initWithDownloadUrlString:(NSString *)urlString;
 //  将json内容转换为多条url，如：http://192.168.172.200/tpl/appHtml/version/html.json
 - (void)getFileDictionaryWithUrl:(NSURL *)url version:(NSString *)version key:(NSString *)key;
 

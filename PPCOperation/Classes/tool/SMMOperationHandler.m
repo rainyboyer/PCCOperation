@@ -16,16 +16,18 @@
 @property (nonatomic, strong) NSString *version;//当前下载的文件类型版本号，如：1.6.3等
 @property (nonatomic, strong) NSString *key;//当前下载的文件类型目录名Key，如：js/html等
 @property (nonatomic, strong) NSURL *fileUrl;//下载文件url
+@property (nonatomic, strong) NSString *downloadUrlString;//源地址
 @end
 @implementation SMMOperationHandler
 
-- (instancetype)init
+- (instancetype)initWithDownLoadUrlString:(NSString *)urlString
 {
     self = [super init];
     if (self)
     {
         _urlCount = 0;
         _downloadCount = 0;
+        _downloadUrlString = urlString;
     }
     return self;
 }
@@ -51,7 +53,7 @@
     [dic enumerateKeysAndObjectsUsingBlock:^(id key, id obj, BOOL *stop)
      {
          _urlCount++;
-         [self getPathsAndFileNameWithUrl:[NSString stringWithFormat:@"%@/%@", DownloadUrl, key]];
+         [self getPathsAndFileNameWithUrl:[NSString stringWithFormat:@"%@/%@", _downloadUrlString, key]];
      }];
 }
 
