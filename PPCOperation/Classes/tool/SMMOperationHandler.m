@@ -101,9 +101,9 @@
         {
             NSFileManager *fileManager = [NSFileManager defaultManager];
             //  location是下载的临时文件目录
-            NSArray *docs = NSSearchPathForDirectoriesInDomains(NSCachesDirectory, NSUserDomainMask, YES);
+            NSArray *docs = NSSearchPathForDirectoriesInDomains(NSDocumentationDirectory, NSUserDomainMask, YES);
             //  根目录
-            NSString *documentsPath = [docs objectAtIndex:0];
+            NSString *documentsPath = NSTemporaryDirectory();//[docs objectAtIndex:0];
             NSLog(@"document: %@", documentsPath);
             
             //  AppHtml目录

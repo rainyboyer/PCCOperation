@@ -47,8 +47,8 @@
 //  读取html文件
 - (void)beginLoad
 {
-    NSArray *paths = NSSearchPathForDirectoriesInDomains(NSCachesDirectory, NSUserDomainMask, YES);
-    NSString *documentsDirectory = [paths firstObject];
+    NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentationDirectory, NSUserDomainMask, YES);
+    NSString *documentsDirectory = NSTemporaryDirectory();//[paths firstObject];
     
     //  AppHtml目录
     NSString *appHtmlDocumentPath = [documentsDirectory stringByAppendingPathComponent:HtmlDocument];
@@ -57,6 +57,8 @@
     NSString *htmlCont = [NSString stringWithContentsOfFile:htmlPath encoding:NSUTF8StringEncoding error:nil];
     
     NSURL *baseUrl1 = [NSURL fileURLWithPath:[appHtmlDocumentPath stringByAppendingPathComponent:@"Faxian"]];
+    
+    NSLog(@"html: %@, baseUrl1: %@", htmlPath, baseUrl1);
     [_wkWebView loadHTMLString:htmlCont baseURL:baseUrl1];
 }
 
