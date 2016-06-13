@@ -32,7 +32,7 @@ PPCSingletonM(Instance)
 
 - (NSString *)cacheDirPath
 {
-    NSArray *paths = NSSearchPathForDirectoriesInDomains(NSCachesDirectory, NSUserDomainMask, YES);
+    NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
     return paths[0];
 }
 @end

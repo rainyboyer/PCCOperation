@@ -101,9 +101,9 @@
         {
             NSFileManager *fileManager = [NSFileManager defaultManager];
             //  location是下载的临时文件目录
-            NSArray *docs = NSSearchPathForDirectoriesInDomains(NSDocumentationDirectory, NSUserDomainMask, YES);
+            NSArray *docs = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
             //  根目录
-            NSString *documentsPath = NSTemporaryDirectory();//[docs objectAtIndex:0];
+            NSString *documentsPath = [docs objectAtIndex:0];
             NSLog(@"document: %@", documentsPath);
             
             //  AppHtml目录
@@ -117,7 +117,7 @@
                                                                         withIntermediateDirectories:YES
                                                                                          attributes:nil
                                                                                               error:nil];
-                NSAssert(createdAppHtmlDocument,@"创建AppHtml目录失败");
+                NSLog(@"create AppHtml Doc: %u, path: %@", createdAppHtmlDocument, appHtmlDocumentPath);
             }
             //  递归创建目录
             [weakSelf createDocumentsWithCurrentDocument:appHtmlDocumentPath paths:[paths mutableCopy] fileName:fileName location:location];

@@ -12,10 +12,10 @@
 #import "SMMBaseApiEngine.h"
 #import "PPCDefine.h"
 
-//#define ApiUrl @"http://192.168.100.200:8009/index.php?g=appApi&m=mapi&a=index"
-//#define DownLoadUrl @"http://192.168.100.200:8009/tpl/appHtml"
-#define ApiUrl @"http://124.172.184.212:8009/index.php?g=appApi&m=mapi&a=index"
-#define DownLoadUrl @"http://124.172.184.212:8009/tpl/appHtml"
+#define ApiUrl @"http://192.168.100.200:8009/index.php?g=appApi&m=mapi&a=index"
+#define DownLoadUrl @"http://192.168.100.200:8009/tpl/appHtml"
+//#define ApiUrl @"http://124.172.184.212:8009/index.php?g=appApi&m=mapi&a=index"
+//#define DownLoadUrl @"http://124.172.184.212:8009/tpl/appHtml"
 @interface PPCAppDelegate ()<SMMOperationHandlerDelegate>
 @property (nonatomic, assign) NSInteger urlCount;
 @property (nonatomic, strong) UIView *loadingView;
@@ -123,9 +123,9 @@
     _urlCount++;
     if (_urlCount == 4)
     {
-        dispatch_async(dispatch_get_main_queue(), ^{
+//        dispatch_async(dispatch_get_main_queue(), ^{
             [_loadingView removeFromSuperview];
-        });
+//        });
         
     }
 }

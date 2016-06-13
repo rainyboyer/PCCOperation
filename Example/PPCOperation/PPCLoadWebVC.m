@@ -12,20 +12,25 @@
 #import "PPCDefine.h"
 #import "WKWebViewJavascriptBridge.h"
 #import <WebKit/WebKit.h>
+#import "WebViewJavascriptBridge.h"
 
-
-@interface PPCLoadWebVC ()<WKUIDelegate, WKNavigationDelegate>
+@interface PPCLoadWebVC ()<WKUIDelegate, WKNavigationDelegate, UIWebViewDelegate>
 @property (nonatomic, strong) WKWebView *wkWebView;
+@property (nonatomic, strong) UIWebView *uiWebView;
 @property (nonatomic, strong) NSString *urlString;
-@property (nonatomic, strong) WKWebViewJavascriptBridge *bridge;
+@property (nonatomic, strong) WKWebViewJavascriptBridge *wkbridge;
+@property (nonatomic, strong) WebViewJavascriptBridge *uiBridge;
 @end
 @implementation PPCLoadWebVC
 
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    self.wkWebView = [[WKWebView alloc]initWithFrame:self.view.frame];
-    [self.view addSubview:_wkWebView];
+//    self.wkWebView = [[WKWebView alloc]initWithFrame:self.view.frame];
+//    [self.view addSubview:_wkWebView];
+    
+    self.uiWebView = [[UIWebView alloc]initWithFrame:self.view.frame];
+    [self.view addSubview:_uiWebView];
     
     [self beginLoad];
 }
@@ -33,13 +38,18 @@
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
-    self.bridge = [WKWebViewJavascriptBridge bridgeForWebView:_wkWebView];
-    [_bridge registerHandler:@"getUrlParams" handler:^(id data, WVJBResponseCallback responseCallback) {
-        // data 后台传过来的参数,例如用户名、密码等
-        
-        NSLog(@"testObjcCallback called: %@", data);
-        // responseCallback 给后台的回复
-        responseCallback(@"Response from abc");
+//    self.wkbridge = [WKWebViewJavascriptBridge bridgeForWebView:_wkWebView];
+//    [_wkbridge registerHandler:@"getUrlParams" handler:^(id data, WVJBResponseCallback responseCallback) {
+//        // data 后台传过来的参数,例如用户名、密码等
+//        
+//        NSLog(@"testObjcCallback called: %@", data);
+//        // responseCallback 给后台的回复
+//        responseCallback(@"Response from abc");
+//    }];
+    self.uiBridge = [WebViewJavascriptBridge bridgeForWebView:_uiWebView];
+    [_uiBridge registerHandler:@"getUrlParams" handler:^(id data, WVJBResponseCallback responseCallback) {
+        NSLog(@"ObjC Echo called with: %@", data);
+        responseCallback(data);
     }];
 }
 
@@ -47,8 +57,10 @@
 //  读取html文件
 - (void)beginLoad
 {
-    NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentationDirectory, NSUserDomainMask, YES);
-    NSString *documentsDirectory = NSTemporaryDirectory();//[paths firstObject];
+    NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+    NSString *documentsDirectory = [paths firstObject];//[NSHomeDirectory() stringByAppendingPathComponent:@"tmp"];
+    
+    NSLog(@"paths: %@", paths);
     
     //  AppHtml目录
     NSString *appHtmlDocumentPath = [documentsDirectory stringByAppendingPathComponent:HtmlDocument];
@@ -59,40 +71,60 @@
     NSURL *baseUrl1 = [NSURL fileURLWithPath:[appHtmlDocumentPath stringByAppendingPathComponent:@"Faxian"]];
     
     NSLog(@"html: %@, baseUrl1: %@", htmlPath, baseUrl1);
-    [_wkWebView loadHTMLString:htmlCont baseURL:baseUrl1];
+    [_uiWebView loadHTMLString:htmlCont baseURL:baseUrl1];
 }
 
 #pragma mark - WKWebViewNavigation Delegate
-- (void)webView:(WKWebView *)webView didFailNavigation:(WKNavigation *)navigation withError:(NSError *)error
-{
-    NSLog(@"error: %@", error.description);
-}
+//- (void)webView:(WKWebView *)webView didFailNavigation:(WKNavigation *)navigation withError:(NSError *)error
+//{
+//    NSLog(@"error: %@", error.description);
+//}
+//
+//- (void)webView:(WKWebView *)webView didFinishNavigation:(WKNavigation *)navigation
+//{
+//    NSLog(@"load finish");
+//}
+//
+//- (void)webView:(WKWebView *)webView didStartProvisionalNavigation:(WKNavigation *)navigation
+//{
+//    NSLog(@"load start");
+//}
+//
+//- (void)webView:(WKWebView *)webView didCommitNavigation:(WKNavigation *)navigation
+//{
+//    NSLog(@"commit");
+//}
+//
+//- (void)webView:(WKWebView *)webView decidePolicyForNavigationAction:(WKNavigationAction *)navigationAction decisionHandler:(void (^)(WKNavigationActionPolicy))decisionHandler
+//{
+//    WKNavigationActionPolicy actionPolicy = WKNavigationActionPolicyAllow;
+//    
+//    NSURLRequest *request = navigationAction.request;
+//    NSLog(@"request: %@", request.URL);
+//    self.urlString = request.URL.absoluteString;
+//    
+//    //这句是必须加上的，不然会异常
+//    decisionHandler(actionPolicy);
+//}
 
-- (void)webView:(WKWebView *)webView didFinishNavigation:(WKNavigation *)navigation
-{
-    NSLog(@"load finish");
-    
-}
-
-- (void)webView:(WKWebView *)webView didStartProvisionalNavigation:(WKNavigation *)navigation
+#pragma mark - UIWebView Delegate
+- (void)webViewDidStartLoad:(UIWebView *)webView
 {
     NSLog(@"load start");
 }
 
-- (void)webView:(WKWebView *)webView didCommitNavigation:(WKNavigation *)navigation
+- (void)webViewDidFinishLoad:(UIWebView *)webView
 {
-    NSLog(@"commit");
+    NSLog(@"load finish");
 }
 
-- (void)webView:(WKWebView *)webView decidePolicyForNavigationAction:(WKNavigationAction *)navigationAction decisionHandler:(void (^)(WKNavigationActionPolicy))decisionHandler
+- (BOOL)webView:(UIWebView *)webView shouldStartLoadWithRequest:(NSURLRequest *)request navigationType:(UIWebViewNavigationType)navigationType
 {
-    WKNavigationActionPolicy actionPolicy = WKNavigationActionPolicyAllow;
-    
-    NSURLRequest *request = navigationAction.request;
-    NSLog(@"request: %@", request.URL);
-    self.urlString = request.URL.absoluteString;
-    
-    //这句是必须加上的，不然会异常
-    decisionHandler(actionPolicy);
+    return YES;
+}
+
+- (void)webView:(UIWebView *)webView didFailLoadWithError:(NSError *)error
+{
+    NSLog(@"error: %@", error.description);
 }
 @end
