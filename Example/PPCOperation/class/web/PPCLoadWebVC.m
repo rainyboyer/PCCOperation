@@ -10,16 +10,17 @@
 #import "SMMBaseApiEngine.h"
 #import "UIColor+Extension.h"
 #import "PPCDefine.h"
-#import "WKWebViewJavascriptBridge.h"
+//#import "WKWebViewJavascriptBridge.h"
 #import <WebKit/WebKit.h>
 #import "WebViewJavascriptBridge.h"
+#import <JavaScriptCore/JavaScriptCore.h>
 
 @interface PPCLoadWebVC ()<WKUIDelegate, WKNavigationDelegate, UIWebViewDelegate>
 @property (nonatomic, strong) WKWebView *wkWebView;
 @property (nonatomic, strong) UIWebView *uiWebView;
 @property (nonatomic, strong) NSString *urlString;
-@property (nonatomic, strong) WKWebViewJavascriptBridge *wkbridge;
-@property (nonatomic, strong) WebViewJavascriptBridge *uiBridge;
+//@property (nonatomic, strong) WKWebViewJavascriptBridge *wkbridge;
+//@property (nonatomic, strong) WebViewJavascriptBridge *uiBridge;
 @end
 @implementation PPCLoadWebVC
 
@@ -46,12 +47,15 @@
 //        // responseCallback 给后台的回复
 //        responseCallback(@"Response from abc");
 //    }];
-    self.uiBridge = [WebViewJavascriptBridge bridgeForWebView:_uiWebView];
-    [_uiBridge registerHandler:@"getUrlParams" handler:^(id data, WVJBResponseCallback responseCallback) {
-        NSLog(@"ObjC Echo called with: %@", data);
-        responseCallback(data);
-    }];
+//    self.uiBridge = [WebViewJavascriptBridge bridgeForWebView:_uiWebView];
+//    [_uiBridge registerHandler:@"getUrlParams" handler:^(id data, WVJBResponseCallback responseCallback) {
+//        NSLog(@"ObjC Echo called with: %@", data);
+//        responseCallback(data);
+//    }];
+    JSContext *context = [_uiWebView valueForKeyPath:@"documentView.webView.mainFrame.javaScriptContext"];
+    context[@"app"] = self;
 }
+
 
 #pragma mark - Private Methods
 //  读取html文件
@@ -72,6 +76,20 @@
     
     NSLog(@"html: %@, baseUrl1: %@", htmlPath, baseUrl1);
     [_uiWebView loadHTMLString:htmlCont baseURL:baseUrl1];
+}
+
+//  js调用OC方法
+-(NSString *)getJson:(NSString *)jsStr
+{
+    NSLog(@"jsStr=%@",jsStr);
+    NSData *jsonData  =[jsStr dataUsingEncoding:NSUTF8StringEncoding];
+    NSError *error;
+    NSDictionary *dic =[NSJSONSerialization JSONObjectWithData:jsonData options:NSJSONReadingMutableContainers error:&error];
+    if(error) {
+        NSLog(@"json解析失败：%@",error);
+    }
+    NSLog(@"json=%@",dic);
+    return @"abc";
 }
 
 #pragma mark - WKWebViewNavigation Delegate

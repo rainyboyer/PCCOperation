@@ -7,14 +7,15 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		18449C4A1CFD30E7007D4186 /* PPCLoadWebVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 18449C491CFD30E7007D4186 /* PPCLoadWebVC.m */; };
+		18F2E56B1D0FB1C000832FAB /* PPCViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 18F2E5671D0FB1C000832FAB /* PPCViewController.m */; };
+		18F2E56C1D0FB1C000832FAB /* PPCLoadWebVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 18F2E56A1D0FB1C000832FAB /* PPCLoadWebVC.m */; };
+		18F2E56E1D0FB1E000832FAB /* demo.html in Resources */ = {isa = PBXBuildFile; fileRef = 18F2E56D1D0FB1E000832FAB /* demo.html */; };
 		6003F58E195388D20070C39A /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6003F58D195388D20070C39A /* Foundation.framework */; };
 		6003F590195388D20070C39A /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6003F58F195388D20070C39A /* CoreGraphics.framework */; };
 		6003F592195388D20070C39A /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6003F591195388D20070C39A /* UIKit.framework */; };
 		6003F598195388D20070C39A /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 6003F596195388D20070C39A /* InfoPlist.strings */; };
 		6003F59A195388D20070C39A /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 6003F599195388D20070C39A /* main.m */; };
 		6003F59E195388D20070C39A /* PPCAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 6003F59D195388D20070C39A /* PPCAppDelegate.m */; };
-		6003F5A7195388D20070C39A /* PPCViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6003F5A6195388D20070C39A /* PPCViewController.m */; };
 		6003F5A9195388D20070C39A /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6003F5A8195388D20070C39A /* Images.xcassets */; };
 		6003F5B0195388D20070C39A /* XCTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6003F5AF195388D20070C39A /* XCTest.framework */; };
 		6003F5B1195388D20070C39A /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6003F58D195388D20070C39A /* Foundation.framework */; };
@@ -35,8 +36,11 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		18449C481CFD30E7007D4186 /* PPCLoadWebVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PPCLoadWebVC.h; sourceTree = "<group>"; };
-		18449C491CFD30E7007D4186 /* PPCLoadWebVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PPCLoadWebVC.m; sourceTree = "<group>"; };
+		18F2E5661D0FB1C000832FAB /* PPCViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PPCViewController.h; sourceTree = "<group>"; };
+		18F2E5671D0FB1C000832FAB /* PPCViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PPCViewController.m; sourceTree = "<group>"; };
+		18F2E5691D0FB1C000832FAB /* PPCLoadWebVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PPCLoadWebVC.h; sourceTree = "<group>"; };
+		18F2E56A1D0FB1C000832FAB /* PPCLoadWebVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PPCLoadWebVC.m; sourceTree = "<group>"; };
+		18F2E56D1D0FB1E000832FAB /* demo.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = demo.html; sourceTree = "<group>"; };
 		54AFFD55C80898BC6389186C /* README.md */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = net.daringfireball.markdown; name = README.md; path = ../README.md; sourceTree = "<group>"; };
 		6003F58A195388D20070C39A /* PPCOperation_Example.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PPCOperation_Example.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		6003F58D195388D20070C39A /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -48,8 +52,6 @@
 		6003F59B195388D20070C39A /* PPCOperation-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "PPCOperation-Prefix.pch"; sourceTree = "<group>"; };
 		6003F59C195388D20070C39A /* PPCAppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PPCAppDelegate.h; sourceTree = "<group>"; };
 		6003F59D195388D20070C39A /* PPCAppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PPCAppDelegate.m; sourceTree = "<group>"; };
-		6003F5A5195388D20070C39A /* PPCViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PPCViewController.h; sourceTree = "<group>"; };
-		6003F5A6195388D20070C39A /* PPCViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PPCViewController.m; sourceTree = "<group>"; };
 		6003F5A8195388D20070C39A /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		6003F5AE195388D20070C39A /* PPCOperation_Tests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = PPCOperation_Tests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		6003F5AF195388D20070C39A /* XCTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCTest.framework; path = Library/Frameworks/XCTest.framework; sourceTree = DEVELOPER_DIR; };
@@ -89,6 +91,34 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		18F2E5641D0FB1C000832FAB /* class */ = {
+			isa = PBXGroup;
+			children = (
+				18F2E5651D0FB1C000832FAB /* root */,
+				18F2E5681D0FB1C000832FAB /* web */,
+			);
+			path = class;
+			sourceTree = "<group>";
+		};
+		18F2E5651D0FB1C000832FAB /* root */ = {
+			isa = PBXGroup;
+			children = (
+				18F2E5661D0FB1C000832FAB /* PPCViewController.h */,
+				18F2E5671D0FB1C000832FAB /* PPCViewController.m */,
+			);
+			path = root;
+			sourceTree = "<group>";
+		};
+		18F2E5681D0FB1C000832FAB /* web */ = {
+			isa = PBXGroup;
+			children = (
+				18F2E56D1D0FB1E000832FAB /* demo.html */,
+				18F2E5691D0FB1C000832FAB /* PPCLoadWebVC.h */,
+				18F2E56A1D0FB1C000832FAB /* PPCLoadWebVC.m */,
+			);
+			path = web;
+			sourceTree = "<group>";
+		};
 		6003F581195388D10070C39A = {
 			isa = PBXGroup;
 			children = (
@@ -125,12 +155,9 @@
 		6003F593195388D20070C39A /* Example for PPCOperation */ = {
 			isa = PBXGroup;
 			children = (
+				18F2E5641D0FB1C000832FAB /* class */,
 				6003F59C195388D20070C39A /* PPCAppDelegate.h */,
 				6003F59D195388D20070C39A /* PPCAppDelegate.m */,
-				6003F5A5195388D20070C39A /* PPCViewController.h */,
-				6003F5A6195388D20070C39A /* PPCViewController.m */,
-				18449C481CFD30E7007D4186 /* PPCLoadWebVC.h */,
-				18449C491CFD30E7007D4186 /* PPCLoadWebVC.m */,
 				6003F5A8195388D20070C39A /* Images.xcassets */,
 				6003F594195388D20070C39A /* Supporting Files */,
 			);
@@ -268,6 +295,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				6003F5A9195388D20070C39A /* Images.xcassets in Resources */,
+				18F2E56E1D0FB1E000832FAB /* demo.html in Resources */,
 				6003F598195388D20070C39A /* InfoPlist.strings in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -336,9 +364,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				6003F59E195388D20070C39A /* PPCAppDelegate.m in Sources */,
-				6003F5A7195388D20070C39A /* PPCViewController.m in Sources */,
+				18F2E56C1D0FB1C000832FAB /* PPCLoadWebVC.m in Sources */,
 				6003F59A195388D20070C39A /* main.m in Sources */,
-				18449C4A1CFD30E7007D4186 /* PPCLoadWebVC.m in Sources */,
+				18F2E56B1D0FB1C000832FAB /* PPCViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
