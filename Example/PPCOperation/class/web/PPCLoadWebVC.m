@@ -14,15 +14,35 @@
 #import <WebKit/WebKit.h>
 #import "WebViewJavascriptBridge.h"
 #import <JavaScriptCore/JavaScriptCore.h>
+#import "SMMUriActionEngine.h"
 
-@interface PPCLoadWebVC ()<WKUIDelegate, WKNavigationDelegate, UIWebViewDelegate>
+@protocol JSObjcDelegate <JSExport>
+- (NSString *)manage:(NSString *)jsStr;
+@end
+@interface PPCLoadWebVC ()<WKUIDelegate, WKNavigationDelegate, UIWebViewDelegate, JSObjcDelegate>
 @property (nonatomic, strong) WKWebView *wkWebView;
 @property (nonatomic, strong) UIWebView *uiWebView;
 @property (nonatomic, strong) NSString *urlString;
+@property (nonatomic, strong) NSString *filePath;
+@property (nonatomic, strong) NSString *sourceDocument;
+@property (nonatomic, strong) JSContext *context;
 //@property (nonatomic, strong) WKWebViewJavascriptBridge *wkbridge;
 //@property (nonatomic, strong) WebViewJavascriptBridge *uiBridge;
 @end
 @implementation PPCLoadWebVC
+
+- (instancetype)initWithFilePath:(NSString *)filePath sourceDocument:(NSString *)sourceDocument
+{
+    self = [super init];
+    if (self)
+    {
+        self.filePath = filePath;
+        self.sourceDocument = sourceDocument;
+        
+        
+    }
+    return self;
+}
 
 - (void)viewDidLoad
 {
@@ -31,9 +51,17 @@
 //    [self.view addSubview:_wkWebView];
     
     self.uiWebView = [[UIWebView alloc]initWithFrame:self.view.frame];
+    [_uiWebView setDelegate:self];
     [self.view addSubview:_uiWebView];
     
     [self beginLoad];
+    
+    self.context = [_uiWebView valueForKeyPath:@"documentView.webView.mainFrame.javaScriptContext"];
+    _context[@"appJs"] = self;
+    _context.exceptionHandler = ^(JSContext *context, JSValue *exceptionValue) {
+        context.exception = exceptionValue;
+        NSLog(@"error：%@", exceptionValue);
+    };
 }
 
 - (void)viewWillAppear:(BOOL)animated
@@ -52,8 +80,8 @@
 //        NSLog(@"ObjC Echo called with: %@", data);
 //        responseCallback(data);
 //    }];
-    JSContext *context = [_uiWebView valueForKeyPath:@"documentView.webView.mainFrame.javaScriptContext"];
-    context[@"app"] = self;
+//    JSContext *context = [_uiWebView valueForKeyPath:@"documentView.webView.mainFrame.javaScriptContext"];
+//    context[@"app"] = self;
 }
 
 
@@ -79,17 +107,25 @@
 }
 
 //  js调用OC方法
--(NSString *)getJson:(NSString *)jsStr
+- (NSString *)manage:(NSString *)jsStr
 {
-    NSLog(@"jsStr=%@",jsStr);
+    NSLog(@"jsStr=%@", jsStr);
     NSData *jsonData  =[jsStr dataUsingEncoding:NSUTF8StringEncoding];
     NSError *error;
     NSDictionary *dic =[NSJSONSerialization JSONObjectWithData:jsonData options:NSJSONReadingMutableContainers error:&error];
     if(error) {
         NSLog(@"json解析失败：%@",error);
     }
-    NSLog(@"json=%@",dic);
-    return @"abc";
+    if ([[dic objectForKey:@"action"] isEqualToString:@"webjson"] && _webJson)
+    {
+        NSData *data = [NSJSONSerialization dataWithJSONObject:_webJson options:NSJSONWritingPrettyPrinted error:&error];
+        NSString *jsonString = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
+        return jsonString;
+    }
+    else
+    {
+        return @"{}";
+    }
 }
 
 #pragma mark - WKWebViewNavigation Delegate
@@ -138,6 +174,7 @@
 
 - (BOOL)webView:(UIWebView *)webView shouldStartLoadWithRequest:(NSURLRequest *)request navigationType:(UIWebViewNavigationType)navigationType
 {
+    [[SMMUriActionEngine sharedEngine] handle:request.URL];
     return YES;
 }
 

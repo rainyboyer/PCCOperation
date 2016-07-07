@@ -10,4 +10,7 @@
 
 @interface PPCLoadWebVC : UIViewController
 
+- (instancetype)initWithFilePath:(NSString *)filePath sourceDocument:(NSString *)sourceDocument;
+
+@property (nonatomic, strong) NSDictionary *webJson;
 @end

@@ -11,11 +11,12 @@
 #import "SMMOperationHandler.h"
 #import "SMMBaseApiEngine.h"
 #import "PPCDefine.h"
+#import "SMMPushArticleAction.h"
 
-#define ApiUrl @"http://192.168.100.200:8009/index.php?g=appApi&m=mapi&a=index"
-#define DownLoadUrl @"http://192.168.100.200:8009/tpl/appHtml"
-//#define ApiUrl @"http://124.172.184.212:8009/index.php?g=appApi&m=mapi&a=index"
-//#define DownLoadUrl @"http://124.172.184.212:8009/tpl/appHtml"
+//#define ApiUrl @"http://192.168.100.200:8009/index.php?g=appApi&m=mapi&a=index"
+//#define DownLoadUrl @"http://192.168.100.200:8009/tpl/appHtml"
+#define ApiUrl @"http://124.172.184.212:8009/index.php?g=appApi&m=mapi&a=index"
+#define DownLoadUrl @"http://124.172.184.212:8009/tpl/appHtml"
 @interface PPCAppDelegate ()<SMMOperationHandlerDelegate>
 @property (nonatomic, assign) NSInteger urlCount;
 @property (nonatomic, strong) UIView *loadingView;
@@ -32,6 +33,7 @@
     [self.window setRootViewController:nc];
     [self.window makeKeyAndVisible];
     
+    [self registerHandler];
     [self netWorking];
     return YES;
 }
@@ -61,6 +63,13 @@
 - (void)applicationWillTerminate:(UIApplication *)application
 {
     // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
+}
+
+//  注册处理器
+- (void)registerHandler
+{
+    SMMPushArticleAction *articleAction = [[SMMPushArticleAction alloc]init];
+    [articleAction load];
 }
 
 //  下载需要更新的url的json文件
